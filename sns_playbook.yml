@@ -1,0 +1,12 @@
+- name: SNS Alert
+  hosts: localhost
+  tasks:
+  - name: Send message via SNS Topic
+    local_action:
+      module: sns
+      msg: "Backup Successful"
+      subject: "Archive Backup Successful"
+      topic: "arn:aws:sns:us-east-1:..."
+      aws_access_key: "AWS access key"
+      aws_secret_key: "AWS secret key"
+      region: "us-east-1"

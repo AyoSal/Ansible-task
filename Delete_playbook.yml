@@ -1,0 +1,14 @@
+---
+  - tasks:
+  - name: Ansible delete tar files
+    find:
+      paths: /tmp/
+      patterns: "*.sql.gz"
+      use:regex: true
+    register: wildcard_files_to_delete
+
+  - name: Ansible remove file wildcard
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ wildcard_files_to_delete.files }}"

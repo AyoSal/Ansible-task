@@ -1,0 +1,9 @@
+---
+- hosts: dbserver
+  tasks:
+  - name: Backup Archive tables
+    shell: |
+      mysql -u root -Bse "select table_name from information_schema.tables where table_name like 'archive_%' and table_schema='{{database}}'" | paste -sd " " - | xargs mysqldump -u root {{database}} | gzip > /tmp/{{database}}_backup.sql.gz
+
+  - name: Ensure Backup file created
+    file: path=/tmp/{{database}}_backup.sql.gz state=file

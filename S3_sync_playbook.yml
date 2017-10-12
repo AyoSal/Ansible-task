@@ -1,0 +1,10 @@
+---
+  - name: basic upload to S3 Bucket
+    s3_sync:
+    bucket: Archived_Tables
+    file_root: /tmp/*.sql.gz
+
+  - name: all the options
+    s3_sync:
+    bucket: Archived_Tables
+    file_root: /tmp/*.sql.gz
